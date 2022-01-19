@@ -88,20 +88,28 @@ app.extendRoutes({
     routes: {
         "(/)": "main",
         "examples": "examples",
-        "document/new/:type":"newDocument",
+        "documents": "documents",
+        "document/new":"newDocument",
+        "document/edit/:id":"editDocument",
         "*url":"pageNotFound"
     },
 
     main:function(){
         app.moveToPage("main");
     },
+    documents:function(){
+        app.moveToPage("documents");
+    },
     examples:function(){
         app.moveToPage("examples", {
             message:"Hello World"
         });
     },
-    newDocument:function(type){
-        app.log("This code is not implemented.");
+    newDocument:function(id){
+        app.moveToPage("newDocument");
+    },
+    editDocument:function(id){
+        app.moveToPage("newDocument", {'id' : id});
     },
     pageNotFound:function(url){
         app.error("Page not found for url '" + url + "'");

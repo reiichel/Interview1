@@ -1,0 +1,97 @@
+.section {
+    padding: 100px 0;
+}
+
+.banner-full .block .logo {
+    margin-bottom: 20px;
+}
+
+.banner-full .block .logo img{
+    width: 20%;
+    max-width: 20%;
+}
+
+.banner-full .block h1 {
+    margin-bottom: 20px;
+}
+
+.banner-full .block p {
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.banner-full .image .img-fluid{
+    width: 100%;
+    max-width: 100%;
+}
+
+.button-link, .button-link:hover, .button-link:focus, .button-link:active{
+    color: white;
+    text-decoration: none;
+}
+
+.button-3 .button-link, .button-3 .button-link:hover, .button-3 .button-link:focus, .button-3 .button-link:active{
+  color: #308f4b;
+  text-decoration: none;
+}
+
+.button{
+    display: inline-block;
+    appearance: none;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.button-2 {
+    background-color: #2ea44f;
+    margin-right: 10px;
+  }
+
+.button-3 {
+    background-color: white;
+    color: #2ea44f;
+  }
+  
+  .button:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .button-2:hover {
+    background-color: #308f4b;
+  }
+  
+  .button-2:focus {
+    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+    outline: none;
+  }
+  
+  .button-2:disabled {
+    background-color: #94d3a2;
+    border-color: rgba(27, 31, 35, .1);
+    color: rgba(255, 255, 255, .8);
+    cursor: default;
+  }
+  
+  .button-2:active {
+    background-color: #298e46;
+    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  }

@@ -1,0 +1,40 @@
+<div class="section banner-full">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <button class="button button-2" role="button">
+          <a class="button-link" href="#document/new">New</a>
+        </button>
+        <table
+          id="myTable"
+          class="table table-hover table-bordered"
+          data-bind="template: {afterRender: initTpl}"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Total Amount</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sortable" data-bind="foreach: documents">
+            <tr class="ui-state-default">
+              <td class="ui-state-default" data-bind="text: Name"></td>
+              <td class="ui-state-default" data-bind="text: TotalAmount"></td>
+              <td>
+                <button class="btn" data-bind="click: $parent.delete.bind(Id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <a
+                  class="edit"
+                  data-bind="attr: { href: '#document/edit/' + Id }"
+                  ><i class="fa fa-pencil-square-o"></i
+                ></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

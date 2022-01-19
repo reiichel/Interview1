@@ -2,7 +2,98 @@
     userInfo:ko.observable(),
     isLoggedIn: ko.observable(),
 
-    mainVm:{},
+    mainVm:(function(){
+        var vm = {
+            Title: 'Manage your documents <br />Simply & Easy',//ko.observable('Manage your documents <br />Simply & Easy')
+            Text: 'The simple, intuitive app that makes it easy<br />to create documents, manage documents <br />and work balances faster.'
+        };
+        return vm;
+    })(),
+
+    documentsVm:(function(){                
+        var vm = {            
+            documents: ko.observableArray(getDocuments())
+        };
+        //console.log("------------", vm.documents);
+        vm.initTpl = function() {
+            $('#myTable').DataTable({
+                responsive: true
+            });
+        };
+        vm.delete = function(doc) {
+            //console.log("delete:", doc);
+            vm.documents.remove(doc);
+            deleteDocument(doc);
+        };
+        vm.add = function(doc){
+            vm.documents.push(doc);
+            addDocument(doc);
+        };
+        vm.edit = function(doc){
+            var match = ko.utils.arrayFirst(vm.documents(), function(d) {
+                return d.Id == doc.Id;
+            }); 
+            //console.log("---match:", doc, match);          
+            if(match != null){
+                vm.delete(match);
+                vm.add(doc);
+            }
+        };
+        vm.getdoc = function(id){
+            var match = ko.utils.arrayFirst(vm.documents(), function(d) {
+                return d.Id == id;
+            }); 
+            //console.log("---match:", doc, match);          
+            if(match != null){
+                return match;
+            } 
+            return null;
+        };  
+        return vm;
+    })(),
+
+    newDocumentVm:(function(){        
+        var vm = {
+            docId: -1,
+            document
+        };
+        vm.activate = function(activationParams){
+            if(typeof activationParams != 'undefined' && typeof activationParams.id != 'undefined'){
+                vm.docId = activationParams.id;
+                let d = app.rootVM.documentsVm.getdoc(vm.docId);
+                if(d != null){
+                    vm.document.Id = d.Id;
+                    vm.document.Name = d.Name;
+                    vm.document.TotalAmount = d.TotalAmount;
+                }
+            }
+        };
+        vm.reset = function(){
+            vm.document = ko.observable(new Document()).extend({
+                validation: {
+                    validator: function (val) {
+                        return val > 0;
+                    },
+                    message: 'The amount must be > 0',
+                    params: vm.document.TotalAmount
+                }
+            });
+            // vm.document.Name.extend({required: true});
+            // vm.document.TotalAmount.extend({required: true});
+        };
+        vm.action = function(){
+            if(vm.docId > -1){
+                app.rootVM.documentsVm.edit({'Id':vm.document.Id, 'Name':vm.document.Name,'TotalAmount':vm.document.TotalAmount});                
+            }
+            else{
+                app.rootVM.documentsVm.add({'Id':Date.now(),'Name':vm.document.Name,'TotalAmount':vm.document.TotalAmount});
+            }
+            vm.reset();
+            window.location = '#documents';
+        }; 
+        vm.reset();     
+        return vm;
+    })(),
 
     examplesVm: (function(){
         var vm = {
